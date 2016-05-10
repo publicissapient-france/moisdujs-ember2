@@ -1,0 +1,19 @@
+<h2>Ajouter un Slot</h2>
+<form {{action 'addSlot' on='submit'}}>
+    <div class="form-group">
+        <label for="slot-column">Colonne</label>
+        <select id="slot-column" class="form-control" value={{selectedColumnNumber}} onchange={{action 'setSelectedColumnNumber' value='target.value'}}>
+            <option value="1">Slot 1</option>
+            <option value="2">Slot 2</option>
+            <option value="3">Slot 3</option>
+            <option value="4">Slot 4</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="slot-name">Nom</label>
+        {{input id="slot-name" type="text" class="form-control" value=slotName}}
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="add-slot">Ajouter</button>
+</form>
