@@ -6,7 +6,7 @@ export default Ember.Component.extend({
     themeService: service('theme'),
 
     didInitAttrs(){
-        this.get('themeService').getAll().then((themes) => this.set('themes', themes));
+        this.set('themes', this.get('themeService').getAll());
     },
 
     actions: {

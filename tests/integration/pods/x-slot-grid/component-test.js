@@ -1,4 +1,5 @@
 /* jshint expr:true */
+import Ember from 'ember';
 import { expect } from 'chai';
 import {
     describeComponent,
@@ -37,9 +38,9 @@ describeComponent(
             //     template content
             //   {{/x-slot-grid}}
             // `);
-            this.set('externalSlots', {1: ['unit-test'], 2: [], 3: ['integration-test'], 4: []});
+            this.set('externalThemes', [{slots: [Ember.Object.create({title: 'unit-test'})]}, {slots: []}, {slots: []}, {slots: []}]);
 
-            this.render(hbs`{{x-slot-grid slots=externalSlots}}`);
+            this.render(hbs`{{x-slot-grid themes=externalThemes}}`);
 
             expect(this.$('#rows').children(), 'children.length').to.have.length(1);
             expect(this.$('#rows>tr').children()[0].innerHTML, '1rst column talk name').to.equal('unit-test');
