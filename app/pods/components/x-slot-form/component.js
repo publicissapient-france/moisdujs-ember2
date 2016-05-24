@@ -1,26 +1,27 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    selectedColumnNumber: 1,
-    slotName: '',
+    selectedThemeId: 1,
+    slotTitle: '',
     actions: {
         addSlot(){
 
-            if(Ember.isEmpty(this.get('slotName'))) {
+            if(Ember.isEmpty(this.get('slotTitle'))) {
                 return;
             }
 
             this.attrs.addSlot({
-                number: this.get('selectedColumnNumber'),
-                name: this.get('slotName')
+                themeId: this.get('selectedThemeId'),
+                title: this.get('slotTitle')
             });
+
             this.setProperties({
-                selectedSlot: 1,
-                slotName: ''
+                selectedThemeId: 1,
+                slotTitle: ''
             });
         },
-        setSelectedColumnNumber(value){
-            this.set('selectedColumnNumber', value);
+        setSelectedThemeId(value){
+            this.set('selectedThemeId', value);
         }
     }
 });

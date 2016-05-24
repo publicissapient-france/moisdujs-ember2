@@ -1,18 +1,17 @@
 <h2>Ajouter un Slot</h2>
 <form {{action 'addSlot' on='submit'}}>
     <div class="form-group">
-        <label for="slot-column">Colonne</label>
-        <select id="slot-column" class="form-control" value={{selectedColumnNumber}} onchange={{action 'setSelectedColumnNumber' value='target.value'}}>
-            <option value="1">Project Bootstrapping</option>
-            <option value="2">Les 4 fantastiques framework Front</option>
-            <option value="3">Qualité et performances Javascript</option>
-            <option value="4">Le cabinet de curiosité Javascript</option>
+        <label for="slot-theme">Themes</label>
+        <select id="slot-theme" class="form-control" value={{selectedThemeId}} onchange={{action 'setSelectedThemeId' value='target.value'}}>
+            {{#each themes as |theme|}}
+                <option value={{theme.id}}>{{theme.title}}</option>
+            {{/each}}
         </select>
     </div>
 
     <div class="form-group">
-        <label for="slot-name">Nom</label>
-        {{input id="slot-name" type="text" class="form-control" value=slotName}}
+        <label for="slot-title">Nom</label>
+        {{input id="slot-title" type="text" class="form-control" value=slotTitle}}
     </div>
 
     <button type="submit" class="btn btn-primary" id="add-slot">Ajouter</button>

@@ -3,10 +3,9 @@
 <table class="table slot-grid">
     <thead class="thead-default">
     <tr>
-        <th>Project Bootstrapping</th>
-        <th>Les 4 fantastiques framework Front</th>
-        <th>Qualité et performances Javascript</th>
-        <th>Le cabinet de curiosité Javascript</th>
+        {{#each themes as |theme|}}
+            <th>{{theme.title}}</th>
+        {{/each}}
     </tr>
     </thead>
     <tbody id="rows">
