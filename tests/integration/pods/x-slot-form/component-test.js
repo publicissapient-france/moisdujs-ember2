@@ -22,18 +22,27 @@ describeComponent(
             //     template content
             //   {{/x-slot-form}}
             // `);
-            let expected = {number: 2, name: 'integration-test'};
+            let expected = {themeId: '2', title: 'integration-test'};
 
             this.set('externalAction', (talk) => {
-                expect(talk.number, 'talk[number]').to.equal(expected.number);
-                expect(talk.name, 'talk[name]').to.equal(expected.name);
+                expect(talk.themeId, 'talk[themeId]').to.equal(expected.themeId);
+                expect(talk.title, 'talk[title]').to.equal(expected.title);
             });
 
-            this.render(hbs`{{x-slot-form addSlot=(action externalAction)}}`);
+            this.set('themes',[{
+                id: '1', title: 'Project Bootstrapping'
+            }, {
+                id: '2', title: 'Les 4 fantastiques framework Front'
+            }]);
 
-            this.$('#slot-column').val(expected.number);
-            this.$('#slot-name').val(expected.name);
-            this.$('button').click();
+            this.render(hbs`{{x-slot-form themes=themes addSlot=(action externalAction)}}`);
+
+            this.$('#slot-theme').val(expected.themeId);
+            this.$('#slot-theme').change();
+            this.$('#slot-title').val(expected.title);
+            this.$('#slot-title').change();
+
+            this.$('#add-slot').click();
         });
     }
 );

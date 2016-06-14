@@ -29,36 +29,34 @@ describeComponent(
         unit: true
     },
     function () {
+        it('should call the method getAll() once', function () {
+            let themeService = Ember.Object.create({getAll(){}});
+            sinon.spy(themeService, 'getAll');
+            this.subject({themeService: themeService});
+
+            expect(themeService.getAll.calledOnce).to.equal(true);
+        });
+
+        it('themes property should have the correct values - with sinon', function () {
+            let themeService = Ember.Object.create({getAll(){}});
+            let stub = sinon.stub(themeService, 'getAll');
+            stub.returns(Promise.resolve([{title: 'Les 4 fantastiques framework Front'}]));
+
+            let component = this.subject({themeService: themeService});
+
+            component.get('themes').then((themes) => {
+                expect(themes.get('firstObject.title')).to.equal('Les 4 fantastiques framework Front');
+            });
+        });
+
         it('themes property should have the correct values', function () {
             this.register('service:theme', themeStub);
             this.inject.service('theme', {as: 'themeService'});
 
-            var component = this.subject();
+            let component = this.subject();
 
             component.get('themes').then((themes) => {
                 expect(themes.get('firstObject.title')).to.equal('Project Bootstrapping');
-            });
-        });
-
-        it('should call the method getAll() once', function () {
-            var themeService = Ember.Object.create({getAll(){}});
-            var spy = sinon.spy(themeService, 'getAll');
-
-            this.subject({themeService: themeService});
-
-            expect(spy.calledOnce).to.equal(true);
-            themeService.getAll.restore();
-        });
-
-        it('themes property should have the correct values - with sinon', function () {
-            var themeService = Ember.Object.create({getAll(){}});
-            var stub = sinon.stub(themeService, 'getAll');
-            stub.returns(Promise.resolve([{title: 'Les 4 fantastiques framework Front'}]));
-
-            var component = this.subject({themeService: themeService});
-
-            component.get('themes').then((themes) => {
-                expect(themes.get('firstObject.title')).to.equal('Les 4 fantastiques framework Front');
             });
         });
     }

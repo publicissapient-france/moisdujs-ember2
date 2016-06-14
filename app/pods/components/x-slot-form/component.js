@@ -10,7 +10,7 @@ export default Ember.Component.extend({
                 return;
             }
 
-            this.attrs.addSlot({
+            this.get('addSlot')({
                 themeId: this.get('selectedThemeId'),
                 title: this.get('slotTitle')
             });
